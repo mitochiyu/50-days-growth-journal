@@ -1,0 +1,9 @@
+{
+  "name": "50 DAYS — The Last Chapter of 2026",
+  "short_name": "50 DAYS",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f0e5",
+  "theme_color": "#173c30",
+  "icons": []
+}

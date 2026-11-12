@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#173c30">
+<meta name="description" content="50일간의 생활과 성장 기록">
+<link rel="manifest" href="manifest.json">
+<title>50 DAYS — The Last Chapter of 2026</title>
+<style>
+:root{--forest:#173c30;--forest2:#285544;--sage:#78917d;--paper:#f4f0e5;--cream:#e8e1d0;--ink:#24352c;--muted:#7c8378;--line:#d9d3c4;--white:#fffdf7;--gold:#b49a61}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
+header{background:var(--forest);color:var(--paper);padding:28px max(20px,calc((100% - 980px)/2)) 24px}
+.kicker{font:11px Arial,sans-serif;letter-spacing:3px;color:#c9c2a9}.brand{font-size:clamp(34px,8vw,58px);letter-spacing:2px;margin:9px 0 3px}.subtitle{font:12px Arial,sans-serif;letter-spacing:1.6px;color:#d4d8cc}.date-range{margin-top:22px;color:#d2c8ae;font:12px Arial,sans-serif;letter-spacing:1.5px}
+nav{display:flex;gap:7px;overflow:auto;padding:12px max(14px,calc((100% - 980px)/2));background:#e9e3d5;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{border:1px solid transparent;background:transparent;color:var(--forest);padding:9px 13px;white-space:nowrap;font:11px Arial,sans-serif;letter-spacing:1px}
+nav button.active{background:var(--forest);color:var(--paper);border-radius:2px}
+main{max-width:980px;margin:0 auto;padding:26px 18px 70px}.view{display:none}.view.active{display:block}
+.eyebrow{font:10px Arial,sans-serif;letter-spacing:2px;color:var(--sage)}h2{font-size:28px;font-weight:400;margin:7px 0 18px;color:var(--forest)}h3{font-size:18px;font-weight:400;color:var(--forest);margin:0 0 12px}
+.panel{background:var(--white);border:1px solid var(--line);padding:18px;margin:14px 0;box-shadow:0 3px 12px #263b2910}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat{background:var(--forest);color:var(--paper);padding:14px 10px;min-height:88px}.stat b{display:block;font-size:25px;font-weight:400}.stat span{font:10px Arial,sans-serif;letter-spacing:1px;color:#d4d8cc}
+.progress{height:7px;background:#e5e0d4;margin:12px 0 5px}.progress i{display:block;height:100%;background:var(--sage);width:0;transition:.2s}
+.path{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:7px;margin-top:16px}
+.day{aspect-ratio:1;border:1px solid var(--line);background:#f7f4eb;color:var(--forest);display:flex;flex-direction:column;align-items:center;justify-content:center;font:13px Arial,sans-serif;position:relative}
+.day.done{background:#dce5d8;border-color:#b8c9b6}.day.today{outline:2px solid var(--gold);outline-offset:1px}.day small{font-size:8px;color:var(--sage);margin-top:3px}
+label{display:block;font:11px Arial,sans-serif;letter-spacing:.7px;color:var(--muted);margin:14px 0 6px}
+input,textarea,select{width:100%;border:1px solid var(--line);background:#fffefa;padding:11px;color:var(--ink);border-radius:0}
+textarea{min-height:90px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:9px}.check{display:flex;align-items:center;gap:8px;font:13px Arial,sans-serif;color:var(--ink)}.check input{width:auto;accent-color:var(--forest)}
+.rating{display:flex;gap:7px}.rating button{flex:1;padding:11px 0;background:#f4f0e5;border:1px solid var(--line);color:var(--forest)}.rating button.selected{background:var(--forest);color:white}
+.primary{background:var(--forest);color:var(--paper);border:0;padding:12px 18px;font:12px Arial,sans-serif;letter-spacing:1px}.secondary{background:transparent;color:var(--forest);border:1px solid var(--forest);padding:10px 14px;font:11px Arial,sans-serif}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.muted{font:12px Arial,sans-serif;color:var(--muted);line-height:1.6}.quote{font-style:italic;font-size:19px;line-height:1.5;color:var(--forest);border-left:2px solid var(--gold);padding-left:14px}
+canvas{width:100%;height:210px;display:block}.weekgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.weekgrid div{background:#e8e4d8;padding:10px 4px;text-align:center;font:11px Arial,sans-serif}
+footer{text-align:center;color:var(--muted);font:10px Arial,sans-serif;letter-spacing:2px;padding:30px}
+@media(max-width:600px){main{padding:20px 13px 50px}.stats{grid-template-columns:repeat(2,1fr)}.path{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.row{grid-template-columns:1fr}.panel{padding:14px}.brand{font-size:38px}}
+</style>
+</head>
+<body>
+<header><div class="kicker">A PERSONAL GROWTH JOURNAL</div><div class="brand">50 DAYS</div><div class="subtitle">THE LAST CHAPTER OF 2026</div><div class="date-range">NOVEMBER 12 — DECEMBER 31, 2026</div></header>
+<nav id="nav">
+<button class="active" data-view="journey">JOURNEY</button><button data-view="daily">DAILY LOG</button><button data-view="stats">STATISTICS</button><button data-view="reflection">REFLECTION</button><button data-view="final">FINAL CHAPTER</button><button data-view="settings">SETTINGS</button>
+</nav>
+<main>
+<section id="journey" class="view active">
+<div class="eyebrow">YOUR 50-DAY JOURNEY</div><h2>Every day leaves a mark.</h2>
+<div class="stats"><div class="stat"><b id="progressNum">0/50</b><span>RECORDED DAYS</span></div><div class="stat"><b id="avgNum">—</b><span>AVG CONDITION</span></div><div class="stat"><b id="exerciseNum">0</b><span>WORKOUT DAYS</span></div><div class="stat"><b id="rateNum">0%</b><span>RECORD RATE</span></div></div>
+<div class="panel"><div style="display:flex;justify-content:space-between"><h3>THE PATH</h3><span class="muted" id="todayLabel"></span></div><div class="progress"><i id="progressBar"></i></div><div class="muted" id="progressText">50일 중 0일 기록</div><div class="path" id="calendar"></div></div>
+<div class="quote">“Not a perfect 50 days, but 50 days of becoming.”</div>
+</section>
+<section id="daily" class="view">
+<div class="eyebrow">A DAY AT A TIME</div><h2 id="logTitle">DAY 01</h2>
+<div class="panel">
+<div class="row"><div><label>DATE</label><input id="logDate" type="date"></div><div><label>DAY NUMBER</label><select id="daySelect"></select></div></div>
+<label>CONDITION · 1–5</label><div class="rating" id="rating"></div>
+<label>DAILY HABITS</label><div class="checks">
+<label class="check"><input type="checkbox" id="sleep"> 규칙적인 수면</label>
+<label class="check"><input type="checkbox" id="meal"> 규칙적인 식사</label>
+<label class="check"><input type="checkbox" id="reading"> 독서</label>
+<label class="check"><input type="checkbox" id="phone"> 스마트폰 사용 관리</label>
+</div>
+<div class="row"><div><label>BEDTIME</label><input id="bedtime" type="time"></div><div><label>WAKE-UP TIME</label><input id="waketime" type="time"></div></div>
+<label class="check" style="margin-top:18px"><input type="checkbox" id="exercise"> 오늘 운동함</label>
+<div class="row"><div><label>EXERCISE TYPE</label><input id="exerciseType" placeholder="예: 걷기, 수영"></div><div><label>DURATION (MIN)</label><input id="exerciseMin" type="number" min="0" placeholder="30"></div></div>
+<div class="row"><div><label>STUDY TIME (HOURS)</label><input id="studyHours" type="number" min="0" step=".5" placeholder="예: 4.5"></div><div><label>STUDY ACHIEVEMENT</label><input id="studyNote" placeholder="주요 성과"></div></div>
+<label>TODAY'S COMMENT</label><textarea id="comment" placeholder="오늘 하루를 솔직하게 기록해 봐."></textarea>
+<label>WHAT CHANGED?</label><textarea id="change" placeholder="어제와 비교해 달라진 점, 새롭게 발견한 모습."></textarea>
+<label>ONE SENTENCE TO REMEMBER</label><input id="sentence" placeholder="오늘을 기억하게 해줄 한 문장">
+<label>PHOTO · OPTIONAL</label><input id="photo" type="file" accept="image/*"><div id="photoPreview" class="muted"></div>
+<div class="actions"><button class="primary" id="saveDay">SAVE DAILY LOG</button><button class="secondary" id="clearDay">CLEAR THIS DAY</button></div><p class="muted" id="saveStatus">기록은 이 브라우저에 저장돼.</p>
+</div></section>
+<section id="stats" class="view"><div class="eyebrow">SMALL STEPS, VISIBLE CHANGE</div><h2>Your progress.</h2><div class="panel"><h3>CONDITION TREND</h3><canvas id="conditionChart" width="900" height="230"></canvas></div><div class="panel"><h3>STUDY HOURS</h3><canvas id="studyChart" width="900" height="230"></canvas></div><div class="panel"><h3>HABIT PRACTICE RATE</h3><div id="habitStats"></div><p class="muted">미응답 날짜는 실천 실패로 계산하지 않아.</p></div></section>
+<section id="reflection" class="view"><div class="eyebrow">PAUSE AND LOOK BACK</div><h2>Weekly reflection.</h2><div class="panel"><label>WEEK</label><select id="weekSelect"></select><label>이번 주 가장 잘한 일</label><textarea id="win"></textarea><label>가장 아쉬웠던 일</label><textarea id="regret"></textarea><label>반복해서 나타난 문제</label><textarea id="pattern"></textarea><label>새롭게 발견한 나의 모습</label><textarea id="discovery"></textarea><label>다음 주 개선할 점</label><textarea id="next"></textarea><label>자유 기록</label><textarea id="freeReflection"></textarea><button class="primary" id="saveWeek">SAVE REFLECTION</button><p class="muted" id="weekStatus"></p></div></section>
+<section id="final" class="view"><div class="eyebrow">DECEMBER 31, 2026</div><h2>The final chapter.</h2><div class="panel"><h3>50 DAYS IN REVIEW</h3><div id="finalSummary" class="muted">기록을 쌓으면 이곳에 여정의 결산이 표시돼.</div><label>2026년의 나에게</label><textarea id="letter" placeholder="50일을 마친 나에게 남기는 말."></textarea><label>2027년에도 이어갈 것</label><textarea id="carry" placeholder="앞으로 유지하고 싶은 습관과 태도."></textarea><button class="primary" id="saveFinal">SAVE FINAL LETTER</button></div></section>
+<section id="settings" class="view"><div class="eyebrow">YOUR DATA, YOURS TO KEEP</div><h2>Settings & backup.</h2><div class="panel"><h3>DATA MANAGEMENT</h3><p class="muted">기록은 현재 브라우저의 로컬 저장 공간에 보관돼. 기기 변경이나 브라우저 데이터 삭제 전에 백업해 줘.</p><div class="actions"><button class="primary" id="exportJson">EXPORT JSON BACKUP</button><button class="secondary" id="exportCsv">EXPORT CSV</button><label class="secondary" style="display:inline-block">IMPORT JSON<input id="importJson" type="file" accept="application/json" style="display:none"></label></div></div><div class="panel"><h3>DAILY REMINDER</h3><p class="muted">브라우저 알림은 권한과 브라우저 지원이 필요해. 사이트가 닫혀 있을 때 매일 알림이 오는 것은 보장되지 않아.</p><label>REMINDER TIME</label><input type="time" id="reminderTime" value="21:30"><div class="actions"><button class="primary" id="enableNotify">ENABLE NOTIFICATIONS</button></div><p class="muted" id="notifyStatus"></p></div><div class="panel"><h3>INSTALL</h3><p class="muted">GitHub Pages에 배포한 뒤 Safari 공유 메뉴에서 '홈 화면에 추가'를 선택하면 앱처럼 사용할 수 있어.</p></div></section>
+</main><footer>50 DAYS · THE LAST CHAPTER OF 2026</footer>
+<script>
+const START=new Date(2026,10,12),TOTAL=50,KEY='fiftyDaysJournalV1';
+const blank=()=>({condition:0,habits:{},bedtime:'',waketime:'',exercise:false,exerciseType:'',exerciseMin:'',studyHours:'',studyNote:'',comment:'',change:'',sentence:'',photo:''});
+let state=JSON.parse(localStorage.getItem(KEY)||'null')||{days:{},weeks:{},final:{letter:'',carry:''},reminder:'21:30'};
+let current=1,photoData='';
+const $=id=>document.getElementById(id);
+function dateFor(n){let d=new Date(START);d.setDate(d.getDate()+n-1);return d}
+function keyDate(n){return dateFor(n).toISOString().slice(0,10)}
+function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderAll()}
+function getDay(n){return state.days[n]||blank()}
+function hasRecord(d){return !!(d.condition||d.comment||d.change||d.sentence||d.exercise||d.studyHours||d.bedtime||d.waketime||Object.values(d.habits||{}).some(Boolean))}
+function renderCalendar(){let el=$('calendar');el.innerHTML='';for(let n=1;n<=50;n++){let d=getDay(n),b=document.createElement('button');b.className='day'+(hasRecord(d)?' done':'')+(n===current?' today':'');b.innerHTML=String(n).padStart(2,'0')+(hasRecord(d)?'<small>RECORDED</small>':'');b.onclick=()=>{current=n;loadDay();show('daily')};el.append(b)}}
+function renderStats(){let ds=Object.values(state.days),recorded=ds.filter(hasRecord),conditions=ds.filter(d=>d.condition).map(d=>d.condition),ex=ds.filter(d=>d.exercise).length,avg=conditions.length?(conditions.reduce((a,b)=>a+b,0)/conditions.length).toFixed(1):'—';$('progressNum').textContent=recorded.length+'/50';$('avgNum').textContent=avg;$('exerciseNum').textContent=ex;$('rateNum').textContent=Math.round(recorded.length/50*100)+'%';$('progressBar').style.width=recorded.length/50*100+'%';$('progressText').textContent=`50일 중 ${recorded.length}일 기록 · ${Math.round(recorded.length/50*100)}%`;drawChart('conditionChart',ds.map(d=>d.condition||null),5);drawChart('studyChart',ds.map(d=>d.studyHours===''?null:Number(d.studyHours)),null);let names={sleep:'규칙적인 수면',meal:'규칙적인 식사',reading:'독서',phone:'스마트폰 사용 관리'};$('habitStats').innerHTML=Object.entries(names).map(([k,v])=>{let vals=ds.map(d=>d.habits?.[k]).filter(x=>x!==undefined),yes=vals.filter(Boolean).length,p=vals.length?Math.round(yes/vals.length*100):0;return `<p>${v} · ${yes}/${vals.length||0} (${p}%)</p><div class="progress"><i style="width:${p}%"></i></div>`}).join('')}
+function drawChart(id,vals,max){let c=$(id),ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);ctx.strokeStyle='#d9d3c4';ctx.lineWidth=1;for(let i=1;i<=4;i++){let y=h-i*h/5;ctx.beginPath();ctx.moveTo(35,y);ctx.lineTo(w-10,y);ctx.stroke()}let nums=vals.filter(v=>v!==null&&Number.isFinite(v));if(!nums.length){ctx.fillStyle='#7c8378';ctx.font='20px Georgia';ctx.fillText('기록이 쌓이면 그래프가 나타납니다.',45,110);return}let ceiling=max||Math.max(1,...nums)*1.15;ctx.strokeStyle='#285544';ctx.lineWidth=3;ctx.beginPath();let started=false;vals.forEach((v,i)=>{if(v===null||!Number.isFinite(v)){started=false;return}let x=35+i*(w-50)/49,y=h-20-(v/ceiling)*(h-45);if(!started){ctx.moveTo(x,y);started=true}else ctx.lineTo(x,y)});ctx.stroke();ctx.fillStyle='#b49a61';vals.forEach((v,i)=>{if(v===null||!Number.isFinite(v))return;let x=35+i*(w-50)/49,y=h-20-(v/ceiling)*(h-45);ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill()})}
+function renderFinal(){let ds=Object.values(state.days),rec=ds.filter(hasRecord).length,ex=ds.filter(d=>d.exercise).length,cs=ds.filter(d=>d.condition).map(d=>d.condition),avg=cs.length?(cs.reduce((a,b)=>a+b,0)/cs.length).toFixed(1):'—';$('finalSummary').innerHTML=`기록한 날: <b>${rec}/50</b><br>운동한 날: <b>${ex}일</b><br>평균 컨디션: <b>${avg}/5</b><br>기록률: <b>${Math.round(rec/50*100)}%</b>`;$('letter').value=state.final.letter||'';$('carry').value=state.final.carry||''}
+function renderAll(){renderCalendar();renderStats();renderFinal()}
+function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='stats')renderStats();if(id==='final')renderFinal();window.scrollTo(0,0)}
+$('nav').addEventListener('click',e=>{let b=e.target.closest('button[data-view]');if(b)show(b.dataset.view)});
+function setup(){for(let n=1;n<=50;n++)$('daySelect').add(new Option('DAY '+String(n).padStart(2,'0'),n));for(let w=1;w<=8;w++)$('weekSelect').add(new Option('WEEK '+w,w));$('daySelect').value=1;let r=$('rating');for(let n=1;n<=5;n++){let b=document.createElement('button');b.textContent=n;b.onclick=()=>{document.querySelectorAll('.rating button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('rating').dataset.value=n};r.append(b)}$('daySelect').onchange=()=>{current=Number($('daySelect').value);loadDay()};loadDay();renderAll();$('todayLabel').textContent='DAY 01 — DEC 31'}
+function loadDay(){let d=getDay(current);$('logTitle').textContent='DAY '+String(current).padStart(2,'0');$('daySelect').value=current;$('logDate').value=keyDate(current);$('rating').dataset.value=d.condition||0;document.querySelectorAll('.rating button').forEach((b,i)=>b.classList.toggle('selected',i+1===d.condition));['sleep','meal','reading','phone'].forEach(k=>$(k).checked=!!d.habits?.[k]);['bedtime','waketime','exerciseType','exerciseMin','studyHours','studyNote','comment','change','sentence'].forEach(k=>$(k).value=d[k]??'');$('exercise').checked=!!d.exercise;photoData=d.photo||'';$('photoPreview').innerHTML=photoData?`<img src="${photoData}" style="max-width:100%;max-height:180px"><br><button class="secondary" id="removePhoto">REMOVE PHOTO</button>`:'';if($('removePhoto'))$('removePhoto').onclick=()=>{photoData='';$('photoPreview').innerHTML=''};$('saveStatus').textContent='기록은 이 브라우저에 저장돼.'}
+$('photo').onchange=e=>{let f=e.target.files[0];if(!f)return;if(f.size>1500000){alert('사진은 1.5MB 이하로 선택해 줘.');e.target.value='';return}let rd=new FileReader();rd.onload=()=>{photoData=rd.result;$('photoPreview').innerHTML=`<img src="${photoData}" style="max-width:100%;max-height:180px">`};rd.readAsDataURL(f)};
+$('saveDay').onclick=()=>{let d={condition:Number($('rating').dataset.value)||0,habits:{},bedtime:$('bedtime').value,waketime:$('waketime').value,exercise:$('exercise').checked,exerciseType:$('exerciseType').value,exerciseMin:$('exerciseMin').value,studyHours:$('studyHours').value,studyNote:$('studyNote').value,comment:$('comment').value,change:$('change').value,sentence:$('sentence').value,photo:photoData};['sleep','meal','reading','phone'].forEach(k=>d.habits[k]=$(k).checked);state.days[current]=d;persist();$('saveStatus').textContent='저장 완료 · '+new Date().toLocaleTimeString('ko-KR');};
+$('clearDay').onclick=()=>{if(confirm('이 날짜의 기록을 모두 삭제할까?')){delete state.days[current];persist();loadDay()}};
+$('weekSelect').onchange=loadWeek;function loadWeek(){let w=$('weekSelect').value,d=state.weeks[w]||{};['win','regret','pattern','discovery','next','freeReflection'].forEach(k=>$(k).value=d[k]||'')}
+$('saveWeek').onclick=()=>{let w=$('weekSelect').value,d={};['win','regret','pattern','discovery','next','freeReflection'].forEach(k=>d[k]=$(k).value);state.weeks[w]=d;localStorage.setItem(KEY,JSON.stringify(state));$('weekStatus').textContent='회고 저장 완료.'};
+$('saveFinal').onclick=()=>{state.final={letter:$('letter').value,carry:$('carry').value};localStorage.setItem(KEY,JSON.stringify(state));alert('최종 편지를 저장했어.')};
+function download(name,content,type){let a=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type}));a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+$('exportJson').onclick=()=>download('50-days-backup.json',JSON.stringify(state,null,2),'application/json');
+$('exportCsv').onclick=()=>{let cols=['day','date','condition','exercise','exerciseType','exerciseMin','studyHours','studyNote','bedtime','waketime','sleep','meal','reading','phone','comment','change','sentence'];let rows=[cols.join(',')];for(let n=1;n<=50;n++){let d=getDay(n),v={day:n,date:keyDate(n),...d,sleep:d.habits?.sleep,meal:d.habits?.meal,reading:d.habits?.reading,phone:d.habits?.phone};rows.push(cols.map(k=>'"'+String(v[k]??'').replaceAll('"','""')+'"').join(','))}download('50-days-records.csv','\uFEFF'+rows.join('\n'),'text/csv;charset=utf-8')};
+$('importJson').onchange=e=>{let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{try{let x=JSON.parse(rd.result);if(!x.days)throw Error();if(confirm('현재 기록을 가져온 백업으로 교체할까?')){state=x;localStorage.setItem(KEY,JSON.stringify(state));renderAll();loadDay();alert('복원 완료.')}}catch(err){alert('올바른 백업 파일이 아니야.')}};rd.readAsText(f)};
+$('enableNotify').onclick=async()=>{if(!('Notification'in window)){ $('notifyStatus').textContent='이 브라우저는 알림을 지원하지 않아.';return}let p=await Notification.requestPermission();state.reminder=$('reminderTime').value;localStorage.setItem(KEY,JSON.stringify(state));$('notifyStatus').textContent=p==='granted'?'알림 권한이 허용됐어. 사이트가 열려 있을 때 설정한 시각을 확인할 수 있어.':'알림 권한이 허용되지 않았어.'};
+function reminderCheck(){if(!('Notification'in window)||Notification.permission!=='granted')return;let now=new Date(),t=state.reminder||'21:30',today=now.toISOString().slice(0,10);if(now.getHours()+':'+String(now.getMinutes()).padStart(2,'0')===t&&localStorage.getItem('reminded-'+today)!=='1'){new Notification('50 DAYS — Daily Check-in',{body:'오늘의 기록을 남길 시간이에요.'});localStorage.setItem('reminded-'+today,'1')}}
+setInterval(reminderCheck,30000);setup();loadWeek();
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
